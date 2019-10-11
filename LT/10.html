@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>10</title>
+</head>
+<body>
+    <input type="_blank" onchange="handling('Søt')" oninput="handling('Super Søt', 'Hallo')" />  
+	   
+
+    <h2 id="info" onmouseover="handling('Søtere')" onmouseout="handling('Søtest')"></h2>
+
+	<div id="resultat"></div>
+    <script>
+	 var info =  document.getElementById('info');
+        
+	function handling(Haha, hehe) {
+      info.innerHTML += "<li>" + Haha + "</li>";
+	if (hehe != undefined) {
+	  info.innerHTML += "<li>" + Haha + hehe + "</li>";
+	}  }
+
+ </script>
+</body>
+</html>

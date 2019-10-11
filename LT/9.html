@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+    <title>9a</title>
+<head></head>
+<body>
+    <input id="bredde" type="range" min="10" max="200" step="1"oninput="calculate()"onchange="calculate()">
+    <input id="høyde" type="range" min="10" max="200" step="1"oninput="calculate()">
+	<div id="boks" style="background-color:#00bfff;"></div>
+    <input id="bredde2" type="range" min="10" max="200" step="1" oninput="calculate()"onchange="calculate()">
+    <input id="høyde2" type="range" min="10" max="200" step="1" oninput="calculate()">
+    <div id="boks2" style="background-color:#ff00ff;"></div>
+    <div id="resultat"></div>
+
+    <script>
+	    var resultatDiv = document.getElementById('resultat')
+        var breddeInput = document.getElementById('bredde');
+        var høydeInput = document.getElementById('høyde');
+        var firkant = document.getElementById('boks')
+
+        var firkant2 = document.getElementById('boks2')
+        var bredde2Input = document.getElementById('bredde2');
+        var høyde2Input = document.getElementById('høyde2');
+        
+       calculate();
+        function calculate() {
+
+            var bredde = breddeInput.value;
+            var høyde = høydeInput.value;
+            var areal = høyde * bredde;
+
+            var bredde2 = bredde2Input.value;
+            var høyde2 = høyde2Input.value;
+            var areal2 = høyde2 * bredde2;
+
+            firkant.style.width = bredde + 'px';
+            firkant.style.height = høyde + 'px';
+
+            firkant2.style.width = bredde2 + 'px';
+            firkant2.style.height = høyde2 + 'px';
+
+            resultatDiv.innerHTML = '' +
+                bredde + '*' + høyde + '=' + areal + 'areal';
+
+            if (areal == areal2) {
+                resultatDiv.innerHTML += '<br>== The numbers are equal';
+            } else {
+                resultatDiv.innerHTML += '<br>== <del>The numbers are equal</del>';
+            }
+            if (areal != areal2) {
+                resultatDiv.innerHTML += '<br/>!= the numbers are not equal';
+            } else {
+                resultatDiv.innerHTML += '<br/>!= <del>the numbers are not equal</del>';
+            }
+            if (areal >= areal2) {
+                resultatDiv.innerHTML += '<br/>>= ' + areal + ' greater or equal ' + areal2;
+            } else {
+                resultatDiv.innerHTML += '<br/>>= <del>' + areal + ' greater or equal ' + areal2 + '</del>';
+            }
+            if (areal > areal2) {
+                resultatDiv.innerHTML += '<br/>> ' + areal + ' greater than ' + areal2;
+            } else {
+                resultatDiv.innerHTML += '<br/>> <del>' + areal + ' greater than ' + areal2 + '</del>';
+            }
+            if (areal <= areal2) {
+                resultatDiv.innerHTML += '<br/><= ' + areal + ' less or equal ' + areal2;
+            } else {
+                resultatDiv.innerHTML += '<br/><= <del>' + areal + ' less or equal ' + areal2 + '</del>';
+            }
+            if (areal < areal2) {
+                resultatDiv.innerHTML += '<br/>< ' + areal + ' less than ' + areal2;
+            } else {
+                resultatDiv.innerHTML += '<br/>< <del>' + areal + ' less than ' + areal2 + '</del>';
+            }
+        }
+ </script>
+</body>
+</html>

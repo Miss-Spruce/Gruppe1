@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>(4) Kodelås</title>
+    <style>
+      div.kodeboks {
+            height: 250px;
+            width: 250px;
+            display: inline-grid;
+            grid-template-columns: 75px 75px 75px; /*lager kolonner*/
+            grid-template-rows: 75px 75px 75px 30px; /*lager rader*/
+			grid-gap: 2px; /*mellomrom mellom knappene*/
+            grid-template-areas: 'en to tre' 'fire fem seks' 'syv åtte ni';
+        }
+        div.en {
+            background-color: lightblue; /*setter bakgrunnsfarge*/
+            display: flex; /*setter display til flex*/
+            justify-content: center; /*setter innhold til senter*/
+            flex-direction: column; /*velger hvilken vei de to linjene over skal gjelde*/
+            text-align: center; /*sentrerer teksten horisontalt*/
+        }
+        div.to {
+            background-color: lightblue; 
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+        }
+        div.tre {
+            background-color: lightblue;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+        }
+        div.fire {
+            background-color: lightblue;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+        }
+        div.fem {
+            background-color: lightblue;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+        }
+        div.seks {
+            background-color: lightblue;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+        }
+        div.syv {
+            background-color: lightblue;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+        }
+       div.åtte {
+            background-color: lightblue;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+        }
+        div.ni {
+            background-color: lightblue;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="kodeboks">
+        <div class="en" onclick="findFirst(this)">1</div>
+        <div class="to" onclick="findFirst(this)">2</div>
+        <div class="tre" onclick="findFirst(this)">3</div>
+        <div class="fire" onclick="findFirst(this)">4</div>
+        <div class="fem" onclick="findFirst(this)">5</div>
+        <div class="seks" onclick="findFirst(this)">6</div>
+        <div class="syv"onclick="findFirst(this)">7</div>
+        <div class="åtte" onclick="findFirst(this)">8</div>
+        <div class="ni" onclick="findFirst(this)">9</div>
+	</div>
+    <div class="bekreft" onclick="refresh()">Bekreft</div>
+	<p id="enteredSoFar">test</p> 
+	<div id="hvisRiktig"></div>
+
+    <script>
+	var correctCode = "7593";
+	var input = "";
+ 
+ function findFirst(par1) {
+	if (document.getElementById('hvisRiktig').innerHTML != ""){
+		document.getElementById('hvisRiktig').innerHTML = "";
+	}
+ 	if (par1.innerHTML == correctCode[input.length]){
+		input += par1.innerHTML;
+		
+		document.getElementById('enteredSoFar').innerHTML = input;
+		if (input == correctCode){
+			document.getElementById('hvisRiktig').innerHTML = "Åpen!";
+		}
+	}else{
+	input = "";
+	document.getElementById('enteredSoFar').innerHTML = input;
+	}
+	
+ }
+
+
+ </script>
+</body>
+</html>

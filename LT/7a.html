@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>7a</title>
+</head>
+<body>
+    <p>Ferdighet 7a - Sette variabel til tilfeldig tall</p>
+    <div id="resultat"></div>
+
+    <div id="boks" style="background-color: purple;width: 300px;height: 
+	300px;"></div>
+
+	<script>
+        var resultatDiv = document.getElementById('resultat');
+		
+        calculate();
+        function calculate() {
+            var bredde = 100 + Math.floor(Math.random() * 50);
+            var høyde = 100 + Math.floor(Math.random() * 50);
+            var sum = bredde + høyde;
+         
+
+			document.getElementById('boks').style.width = bredde + 'px';
+			document.getElementById('boks').style.height = høyde + 'px'; 
+
+			  resultatDiv.innerHTML = '' +
+                bredde + '+' + høyde + '=' + sum + '<br/>' 			
+	}
+</script>
+</body>
+</html>

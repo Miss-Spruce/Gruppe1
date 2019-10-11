@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>8</title>
+    <style>
+        .stil1 {
+		font-size: 60px; 
+         
+        }
+		.stil2 {
+		font-family: Arial;
+          
+        }
+		.stil3 {
+		border: 3px solid black;
+		
+		}
+	   .stil3 {
+	   	   background-color: purple;
+	   }
+	   .stil4 {
+	   	  
+		   color: yellow;
+	   }
+	   .stil5 {
+	   	  text-align: center;
+	   }
+ </style>
+</head>
+<body>
+    <div id="bla" class>Eksempel</div>
+	
+    <input id="chk1" type="checkbox" onchange="toggleStyle1()">
+	<input id="chk2" type="checkbox" onchange="toggleStyle2()">
+	<input id="chk3" type="checkbox" onchange="toggleStyle3()">
+	<input id="chk4" type="checkbox" onchange="toggleStyle4()">
+	<input id="chk5" type="checkbox" onchange="toggleStyle5()">
+
+    <script>
+  
+        function toggleStyle1() {
+            var isChecked = document.getElementById('chk1').checked;
+            document.getElementById('bla').classList.toggle('stil1', isChecked);
+        }
+        function toggleStyle2() {
+            var isChecked = document.getElementById('chk2').checked;
+            document.getElementById('bla').classList.toggle('stil2', isChecked);
+        }
+        function toggleStyle3() {
+            var isChecked = document.getElementById('chk3').checked;
+            document.getElementById('bla').classList.toggle('stil3', isChecked);
+        }
+        function toggleStyle4() {
+            var isChecked = document.getElementById('chk4').checked;
+            document.getElementById('bla').classList.toggle('stil4', isChecked);
+        }
+        function toggleStyle5() {
+            var isChecked = document.getElementById('chk5').checked;
+            document.getElementById('bla').classList.toggle('stil5', isChecked);
+        }
+         var divElement = document.getElementById('bla');
+             
+</script>
+</body>
+</html>

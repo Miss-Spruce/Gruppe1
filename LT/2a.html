@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>2a</title>
+</head>
+<body onload="testOnLoad()">
+    <p>Et lite innblikk</p>
+	<button onclick="doClick()">Trykk her</button>
+	<style>
+	body {
+  background-image: url("https://scontent.fosl3-1.fna.fbcdn.net/v/t1.0-9/36317837_1996814823683930_2774388670935859200_o.jpg?_nc_cat=107&_nc_oc=AQktNbej7MvRP46j-7WhCj0P-evyR95NNbYWOGF5iXOTo5NYk6tzmKeKOQ6yCB641GI&_nc_ht=scontent.fosl3-1.fna&oh=b7aed33216c3d04edace7bd10007232f&oe=5E3CC95A");
+  background-repeat: no-repeat;
+  background-position: right top;
+  background-attachment: fixed;
+  background-position: left;
+ 
+	}
+	p {
+		font-size: 70px;
+		color: #06DCFB
+	
+	}
+	a {
+		color: Pink;
+		font-size: 40px;
+	}
+	h3 {
+		Color: lightblue;
+		font-size: 40px;
+    }
+	</style>
+  <script>
+
+        alert('Tørr du gå inn her?');
+        function doClick() {
+            alert('en irriterende popup');
+        }
+		</script>
+    <input type="_blank" onchange="testOnChange()" oninput="testOnInput()" />
+    <h3 onmouseover="testOnMouseOver()" onmouseout="testOnMouseOut()">Hva tenker du på?</h3>
+    <h2 id="info"></h2>
+
+    <a href="https://www.instagram.com/miss.spruce/">Check out my instagram!</a>
+	
+    <script>
+        function testOnLoad() {
+            document.getElementById('info').innerHTML += '<li>Søt</li>';
+        }
+        function testOnChange() {
+            document.getElementById('info').innerHTML += '<li>Love</li>';
+        }
+        function testOnInput() {
+            document.getElementById('info').innerHTML += '<li>Lille Gullet</li>';
+        }
+        function testOnMouseOver() {
+            document.getElementById('info').innerHTML += '<li>Søtere</li>';
+        }
+        function testOnMouseOut() {
+            document.getElementById('info').innerHTML += '<li>Søtest</li>';
+        }
+    </script>
+</body>
+</html>

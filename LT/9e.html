@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>9e</title>
+</head>
+<body>
+<select id="colorChooser" onchange="showDiv()"> 
+<option value="black">black</option> 
+<option selected value="darkblue">dark blue</option> 
+<option value="lightgray">light gray</option> 
+<option value="lightgreen">light green</option> 
+<option value="#FFC8C8">light red</option> 
+</select>
+    <div id="resultat"></div>
+ 
+
+<script>
+   var resultatDiv = document.getElementById('resultat');
+   var colorChooser = document.getElementById('colorChooser');
+   showDiv();
+
+
+   function showDiv() {
+    if (colorChooser.value == "black" || colorChooser.value == "darkblue"){
+	resultatDiv.innerHTML = '<div style="'
+   + 'background-color:' + colorChooser.value + ';'
+   + 'width: 200px;' + 'height: 200px;'
+   + '">' 
+   document.body.style.backgroundColor = 'white';
+   return;
+	}
+   resultatDiv.innerHTML = '<div style="'
+   + 'background-color: ' + colorChooser.value + ';'
+   + 'width: 200px;' + 'height: 200px;'
+   + '">'
+	document.body.style.backgroundColor = 'black';
+	}
+	
+</script>
+</body>
+</html>
