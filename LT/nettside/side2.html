@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Lena`s Quiz</title>
+</head>
+<style>
+body {
+  background-image: url("http://3.120.185.93/wp-content/uploads/2016/04/835917577_1387023807.jpg");
+  background-repeat: no-repeat;
+  background-position: right top;
+  background-attachment: fixed;
+  background-position: center;
+ 
+}
+h1 {
+    color: #66FF99;
+	border: solid #00CCFF;
+	width: 1050px;
+	height: 40px;
+	padding: 30px;
+	margin: 30px;
+	}
+h2 {
+    background-color: black;
+	color: #FF4AFF;
+	padding: 20px;
+	margin: 20px;
+	float: left;
+	border: solid #FF9900 3px;
+}
+h2.FIL {
+	clear: left;
+}
+</style>
+<body>
+    <h1>Hvilken country artist er med i sangen "Old Town Road" med Lil Nas X?</h1>
+	<h2 id="a1"onclick="doSomething(this)">1. Alan Jackson</h2>
+	<h2 id="a2"onclick="doSomething(this)">2. Toby Keith</h2>
+    <h2 id="a3"class="FIL" onclick="doSomething(this)">3. Garth Brooks</h2>
+    <h2 id="a4"onclick="bytt()">4. Billy Ray Cyrus</h2>
+
+
+    <script>
+        function doSomething(feilSvar) {
+            feilSvar.innerHTML = 'Feil';
+		}
+	    function bytt() {
+			document.getElementById('a4').innerHTML = 'Riktig!!';
+		}
+
+       
+    </script>
+</body>
+</html> 
