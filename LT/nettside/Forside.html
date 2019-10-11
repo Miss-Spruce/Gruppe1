@@ -1,0 +1,263 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>test</title>
+    
+<style>
+	*{
+    padding: 0; border: 0; margin: 0; 
+    box-sizing: border-box;
+    list-style-type: none; /* Styled in normalize.css */
+    text-decoration: none;
+    color: #ccc;
+	}
+body{
+    background-color: #003333;
+	}
+	
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0 auto;
+    max-width: 1550px;
+    padding-top: .5rem;
+    width: 93%;
+}
+.main-header a{
+    margin: auto;
+    letter-spacing: .18rem;
+    text-transform: uppercase;
+	font-size: 70px;
+	
+}
+.masthead{
+    /* Gjør så menyen vises */
+    position: relative;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    align-items: baseline;
+    display: flex;
+    justify-content: space-between;
+}
+.masthead h1{
+    transition-delay: 450ms;
+}
+.menu-toggle{
+    cursor: pointer;
+    width: 55px;
+    z-index: 3;
+}
+.menu-toggle div{
+    background-color: #336633;
+    border-radius: 25px;
+    box-shadow: 0px 3px 13px rgba(0,0,0,.3);
+    height: 7px;
+    transition-duration: 250ms;
+    transition-timing-function: cubic-bezier(.13,.24,.35,1.64);
+}
+.menu-toggle .one,
+.menu-toggle .two{
+    margin-bottom: 7px;
+}
+.main-contents{
+    flex: auto;
+}
+.main-contents p{
+    font-size: 1.1rem;
+    letter-spacing: 1.7px;
+    line-height: 1.35;
+         color: #ccc;
+         transition-delay: 150ms;
+         transition-duration: 850ms;
+}
+.main-footer span{
+     transition-delay: 150ms;
+     transition-duration: 1350ms;
+}
+/*endrer på copyright(tekst i bunn)*/
+.main-footer{
+    font-size: .9em;
+    letter-spacing: .18rem;
+    margin-bottom: 1.5rem;
+     margin-top: 4rem;
+    text-align: center;
+    text-transform: uppercase;
+}
+/* Style and animate the nav overlay */
+.main-nav-list::before,
+.main-nav-list::after{
+    background-color:#006666;
+    content:"";
+    position: absolute;
+    top: 0;
+    height: 100vh;
+    width: 0vw;
+    transition: all 100ms ease-in-out 300ms;
+}
+.main-nav-list::before{
+    left: 0;
+}
+.main-nav-list::after{
+    right: 0;
+}
+/*Utseende+ på tekst i menyen*/
+.main-nav-list ul{
+    position: absolute;
+    top: -30%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    transition-duration: 300ms;
+    transition-timing-function: ease-in-out;
+    z-index: 2000;
+}
+.main-nav-list a{
+    display: block;
+    font-size: 2rem;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+    opacity: 0;
+    text-align: center;
+    text-transform: uppercase;
+    transition-delay: 130ms;
+}
+.main-nav-list .mobile-hide{/* skjuler element på telefon */
+    display: none;
+}
+/*stil på elementet når det er aktivt*/
+.masthead.active h1{
+    text-shadow: 0px 3px 3px rgb(0,0,0,.4);
+}
+/*disse tre blir fra en Meny knapp til et kryss*/
+.menu-toggle.active .one{
+    box-shadow: 0px 3px 13px rgb(0,0,0,.4);
+    transform: translate(0, 14px) rotate(45deg);
+}
+.menu-toggle.active .two{
+    background-color: transparent;
+    box-shadow: none;
+    transform: translateX(-55px);
+}
+.menu-toggle.active .three{
+    box-shadow: 0px 3px 13px #CC6633;
+    transform: translate(0,-14px) rotate(-45deg);
+}
+/*Får opp og bort listen*/
+.main-nav-list.active::before,
+.main-nav-list.active::after{
+    width: 25vw;
+}
+/*viser det som står i menyen når den er åpen*/
+.main-nav-list.active ul{
+    top: 50%;
+    transform: translate(-50%,-50%);
+    transition-delay: 560ms;
+    transition-duration: 240ms;
+    transition-timing-function: cubic-bezier(.1, .2, .3, 1.4);
+}
+.main-nav-list.active a{
+    transition-delay: 600ms;
+    opacity: 1;
+}
+/*skjuler det under siden som kommer opp*/
+.wrapper.active p{
+     color: #003333;
+               transition-delay: 150ms;
+     transition-duration: 350ms;
+}
+.main-footer.active span{
+     color: #003333;
+          transition-duration: 350ms;
+}  
+</style> </head>
+<body> 
+<div class="wrapper active-element">
+<header class="main-header">
+<nav>
+<div class="masthead active-element">
+<h1><a href="#0">Høyjord Fjellsprengning</a></h1>
+<div id="menu-toggle" class="menu-toggle active-element">
+<div class="one"></div>
+<div class="two"></div>
+<div class="three"></div>
+</div></div>
+ <div class="main-nav-list active-element">
+  <ul>
+       <li><a href="#">Aleksander Gran</a></li>
+       <li><a href="https://miss-spruce.github.io/H.jord-Fjellsprengning/kontakt.html">Kontakt</a></li>
+       <li><a href="#" class="mobile-hide">Gruppe 1</a></li>
+       <li><a href="#" class="active-link">Oppgaver</a></li>
+       <li><a href="#">Tull.no</a></li>
+</ul>
+</div>
+
+</nav>
+</header>
+<main class="main-contents">
+<br />
+<br />
+<br />
+
+
+<p id="demo">Hei</p>
+<p>Entreprenørene skal følge det som til enhver tid er gjeldende lover og forskrifter
+Arbeid som omfatter sprenging skal følge forskrift om håndtering av eksplosjonsfarlig stoff fra DSB. 
+Her stilles blant annet krav til sertifikater til bergsprengingsleder og bergsprenger (disse to rollene kan være samme person). 
+Sertifikatene skal sikre at de som planlegger og utfører sprengningsarbeid har nødvendig kompetanse.<p>
+<br />
+<p>
+Statens vegvesen har ansvar for å sjekke at entreprenørene har gjennomført pålagte kontroller
+Det er en del av hovedbedriftens samordningsansvar å se til at alt personell har de nødvendige sertifikater. 
+Byggherren har et påseansvar, som går ut på at vi sjekker ut at hovedbedriften har kontrollert. 
+Utover dette kan byggherren også, som en del av sin stikkprøvekontroll, be om få se sertifikatene. 
+Byggherre følger opp dette enten i samhandlingsfasen eller i et av de første byggemøtene.
+Etter Namsosulykken i 2003 innførte Statens vegvesen tiltak for å unngå sprengningsulykker
+Tiltakene omfatter prosedyrer og sjekklister som skal sikre at byggherren ivaretar sitt påseansvar på en tilfredsstillende måte. 
+Disse prosedyrene ble revidert i 2013 (NA2013/04).</p>
+<br />
+<p>
+Statens vegvesen gjennomfører intern opplæring om regelverket som gjelder for sprengningsarbeid
+For å forebygge og for å styrke vår kompetanse i forhold til regelverket, gjennomfører Statens vegvesen interne opplæringskurs for byggherrepersonell på anlegg med sprengningsarbeider. 
+Kurset skal hjelpe vårt personell til å kunne avdekke eventuelle mangler, dersom entreprenøren ikke følger regelverket. 
+Disse kursene ble fra sommeren 2014 obligatorisk for alt byggherrepersonell i Statens vegvesen, ved sprengningsarbeid. </p>
+<br />
+<p>
+Statens vegvesen legger stor vekt på å lære av uønskede hendelser knyttet til arbeid med sprengstoff
+Statens vegvesen har rutiner for å rapportere inn ulykker og hendelser som kunne ført til ulykker. 
+Dette er et viktig arbeid for å avdekke eventuelle behov for nye revideringer. 
+NA-rundskriv setter krav om at regionen skal sende rapport til Vegdirektoratet innen 48 timer etter at hendelsen har inntruffet. 
+Dette skal gjøres i tilfeller hvor hendelsen enten har medført alvorlig skade eller i de tilfeller hvor hendelsen under litt andre omstendigheter kunne medført alvorlig skade.</p>
+</main>
+<footer class="main-footer active-element"><span class="copyright">&copy;2019 Lena Therese Gran</span></footer>
+</div>
+
+<script>
+/*grab HTML items from this file*/
+/*id = #, class = .*/
+var menuToggle = document.querySelector("#menu-toggle");
+var activeElements = document.querySelectorAll(".active-element");
+var toggledMenu = menuToggle.addEventListener("click", function(){
+
+
+for(var activated = 0; activated < activeElements.length; activated++){
+    activeElements[activated].classList.toggle("active"); }
+})
+
+  var greeting;
+  var time = new Date().getHours();
+  if (time < 10) {
+    greeting = "God morgen!";
+  } else if (time < 19) {
+    greeting = "God dag!";
+  } else {
+    greeting = "God kveld!";
+  }
+  document.getElementById("demo").innerHTML = greeting;
+
+</script>
+</html>
+</body>
