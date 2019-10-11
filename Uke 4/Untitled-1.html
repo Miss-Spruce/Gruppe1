@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+    div {
+        background-color: aquamarine;
+        font-size: 300%; 
+    }
+</style>
+</head> 
+<body>
+    <div>🦄</div>
+<div id="info"></div>
+<input onchange="calculate()" type="checkbox" id="chk1" />A<br />
+<input onchange="calculate()" type="checkbox" id="chk2" />B<br />
+<input onchange="calculate()" type="checkbox" id="chk3" />C<br />
+<input onchange="calculate()" type="checkbox" id="chk4" />D<br />
+<input onchange="calculate()" type="checkbox" id="chk5" />E<br />
+
+<script type="text/javascript">
+ /* 
+ valgsetninger
+ ✓ for eksempel basert på å sammenligne tall
+ ✓ generelt: en logisk verdi (av typen "boolean")
+ ✓ flere betingelser sammen: 
+ ✓hvis (if) - ellers (else) - ellers-hvis (else if)
+ Datatyper 
+ - tekst
+ - tall 
+   - heltall
+   - desimaltall
+ - logisk: KUN to mulige verdier: true/false
+
+Tilordninger
+  eks: a = a + 1;
+       a += 1; // betyr det samme;
+       a += 3; // betyr a = a + 3;
+       a *= 3; // betyr a = a * 3;
+       a++; // betyr a=a+1; dvs a+=1;
+       ++a; // betyr a=a+1; dvs a+=1;
+       a--; // betyr a=a-1; dvs a-=1;
+       --a; // betyr a=a-1; dvs a-=1;
+
+    var a = 1;
+    var b = a++; // b blir 1; a blir 2(a økes etterpå)
+   --------------------------------------
+    var a = 1;
+    var b = ++a; // b blir 2, a blir 2(a økes først)
+
+Et uttrykk i Jacascript/en verdi kan lages på flere måter
+(Både høyre side i tilordning
+og gjelder også alle steder Javascript forventer en verdi)
+- konstant/"literal"
+ - tekst: 'dsdasd'
+ - tall 34 eller 34.3
+ - logisk: true eller false
+ - flere uttrykk bundet sammen med operatorer
+   eks: a = 5 + 2;
+- kall på en funksjon
+   eks: a = Math.floor(5.5); // blir 5
+   eks: a = Math.floor(Math.random()*8)+1; // blir 1-9
+  */
+
+ function calculate() {
+    var div = document.getElementById('info');
+    var sum =
+        document.getElementById('chk1').checked
+        +document.getElementById('chk2').checked
+        +document.getElementById('chk3').checked
+        +document.getElementById('chk4').checked
+        +document.getElementById('chk5').checked;
+    div.innerHTML = sum;
+ }
+  var greaterThanSymbol = '&gt;';
+  var smallerThanSymbol = '&lt;';
+
+  window.onresize = windowSizeChanged;
+  windowSizeChanged(); 
+
+  function windowSizeChanged() {
+      var div = document.getElementById('info');
+
+    
+
+
+    //   var heigth = window.innerHeight;
+    //   var width = window.innerWidth;  
+    //   div.innerHTML = heigth + 'x' + width;
+    //   var erBred = width > 500;
+    //   div.innerHTML += '<br/>erBred = ' + erBred;
+
+    // if (erBred) {
+    //     div.innerHTML += '<br/>Bredden er større enn 500';
+    // }
+  }
+</script>
+</body>
+</html>

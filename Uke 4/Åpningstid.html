@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<style>
+   body {
+        background-color: #bdd2c3;
+    }
+    h1 {
+    border: solid black;
+    margin: 20px; 
+    width: 570px;
+    }
+    div {
+        font-family: 'Franklin Gothic Medium';
+        font-size: 40px;
+    }
+    
+</style>
+<body>  
+<h1>
+<img src="https://static.wixstatic.com/media/a39424_44ef8e63a5554434bf199ccc9dc9fb75~mv2.png/v1/fill/w_560,h_136,al_c,q_80,usm_0.66_1.00_0.01/a39424_44ef8e63a5554434bf199ccc9dc9fb75~mv2.webp"></h1>
+<div id="dayAndTime" style="padding-top: 20px;"></div>
+<script type="text/javascript">
+    var div =  document.getElementById('dayAndTime'); 
+   
+
+    var d = new Date();
+    var hour = d.getHours();
+    var minute = d.getMinutes();
+    var dayNo = d.getDay();
+    
+    day = dayNameFromNumber(dayNo); 
+  
+    // Mandag - torsdag 11-17
+    if(dayNo < 5) show(hour >= 11 && hour <= 16); 
+    // Fredag 11-18
+    else if (dayNo == 5) show(hour >= 11 && hour <= 17);
+    // Lørdag 11-15
+    else if (dayNo == 6) show(hour >= 11 && hour <= 14);
+    else if (dayNo == 7) show(false);
+  
+ function show(isOpen) {
+     var text = isOpen ? 'Åpent 💙' : 'Stengt! 😔';
+     div.innerHTML = '<p>'+text+'</p>';
+ }
+  
+ function dayNameFromNumber(dayNo) {
+    var day;
+    if (dayNo === 1) day = 'Mandag'; 
+    if (dayNo === 2) day = 'Tirsdag';
+    if (dayNo === 3) day = 'Onsdag';
+    if (dayNo === 4) day = 'Torsdag'
+    if (dayNo === 5) day = 'Fredag';
+    if (dayNo === 6) day = 'Lørdag';
+    if (dayNo === 7) day = 'Søndag';
+    return day;
+  }
+</script>
+</body>
+</html>
