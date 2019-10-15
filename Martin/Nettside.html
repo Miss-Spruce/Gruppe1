@@ -1,0 +1,184 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        div.page {
+            height: 100vh;
+            display: grid;
+            /*kan også bruke px(pixler) istede for fr(fractions)*/
+            grid-template-columns: 90px 9fr;
+            grid-template-rows: 50px 10fr 1fr 40px;
+            /*grid-template viser oppsett for gridden skiller horisontalt med mellomrom*/
+            grid-template-areas:'header header ' 
+                                'meny  innhold ' 
+                                'meny  innhold ' 
+                                'footer footer ';
+        }
+
+        div.header {
+            background-color: red;
+            grid-area: header;
+        }
+
+        div.meny {
+            background-color: lightslategrey;
+            grid-area: meny;
+            
+
+        }
+
+        div.innhold {
+            background-color: lightgrey;
+            grid-area: innhold;
+
+        }
+        /*
+        div.mid{
+            float:right;            floaten flytter boksen til høyre
+           padding-top: 50%;
+           padding-bottom: 0%;
+           padding-right: 0%;
+           padding-left: 50%;
+            background-color: aquamarine;
+            
+            
+        }*/
+        div.footer {
+            background-color: #333;
+            grid-area: footer;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow:auto;
+            background-color: #333;
+        }
+        li {
+            margin-left: 90px;
+            float:left;
+        }
+
+        li a {
+            display: inline-flex;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        
+        ul1 {
+            list-style-type:square;
+            margin: 0;
+            padding: 0;
+            overflow:auto;
+            background-color: #333;
+        }
+        li1 {
+            clear: right;
+        }
+
+        li1 a {
+            display: inline-flex;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        /*p.home{
+            display: none;
+        }
+
+        p.news{
+            display: none;
+        }*/
+       
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="header">
+
+            <ul>
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#news">News</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </div>
+
+
+        <div class="meny">
+            <ul1>
+                <li1><a href="#home" onclick="home()">Home</a></li1>
+                <br />
+                <li1><a href="#news" onclick="news()">News</a></li1>
+                <br />
+                <li1><a href="#contact">Contact</a></li1>
+                <br />
+                <li1><a href="#about">About</a></li1>
+            </ul1>
+        </div>
+        <div class="innhold">
+            Innhold
+            <div class="mid"></div>
+            <p class="tekst home" id="aaa">
+                Programmering består av å designe, skrive, teste, feilsøke og vedlikeholde kildekoden til et program som skal tolkes av en datamaskin. Personen som foretar seg programmering kalles en programmerer eller utvikler. Utvikleren skriver kode etter en spesifikk syntaks som inneholder instruksjoner på hvordan programmet skal oppføre seg og hvilke kalkulasjoner det skal gjøre.[trenger referanse]
+
+                Man skiller som regel ut nivåene man skriver kode i lavnivå- og høynivåprogrammering, men også markeringsspråk. Kort sagt består lavnivå-programmering av koding hvor det er svært få abstraksjoner, eller lag, mellom koden utvikleren skriver og instruksjonene som maskinen leser. Et eksempel på lavnivåprogrammering er maskinkode, mens programmering i høynivå vil for eksempel være Java eller C++. For markeringsspråk så blir dette ikke sett som programmering fordi dette ikke tillater å definere prosesser.
+
+                Ada Byron Lovelace var den første som beskrev hvordan en maskin kunne programmeres.
+            </p>
+
+            <p class="tekst news" id="bbb">
+                Kongeriket Norge (nynorsk: Kongeriket Noreg, nordsamisk: Norgga gonagasriika) er et nordisk, europeisk land og en selvstendig stat vest på Den skandinaviske halvøy. Geografisk sett er landet langt og smalt. På den langstrakte kysten mot Nord-Atlanteren befinner Norges vidkjente fjorder seg. 
+                Kongeriket Norge omfatter i tillegg til fastlandet, Jan Mayen og Svalbard. Med disse to arktiske områdene omfatter Norge et landareal på 385 000 km2 og har et innbyggerantall på drøyt fem millioner (2016). Fastlands-Norge grenser i øst til Sverige, i nordøst til Finland og Russland.
+
+                Norge er et parlamentarisk demokrati og konstitusjonelt monarki, hvor Harald V siden 1991 er konge og statsoverhode, og Erna Solberg (H) er siden 2013 statsminister. Norge er en enhetsstat, med to administrative nivå under staten: fylker og kommuner. Den samiske delen av befolkningen har, gjennom Sametinget og Finnmarksloven, til en viss grad selvstyre og innflytelse over tradisjonelt samiske områder. 
+                Selv om Norge har avvist medlemskap i Den europeiske union gjennom to folkeavstemninger, har Norge gjennom EØS-avtalen tette bånd til unionen, og gjennom NATO med USA. Norge er en betydelig bidragsyter i De forente nasjoner (FN), og har deltatt med soldater i flere utenlandsoperasjoner med mandat fra FN.
+                Norge er blant statene som har vært med fra grunnleggelsen av FN, NATO, Europarådet, OSSE og Nordisk råd, og er i tillegg til disse medlem av EØS, Verdens handelsorganisasjon, Organisasjonen for økonomisk samarbeid og utvikling og er en del av Schengen-området.
+
+            </p>
+        </div>
+        <div class="footer">Footer</div>
+
+    </div>
+
+    <script>
+
+
+        function home() {
+            //document.getElementsByClassName("tekst").style.display = "none";
+            //document.getElementsByClassName("home").style.display = "inline";
+            document.getElementsByClassName("tekst").innerHTML = "none";
+            
+            
+        }
+
+        function news() {
+            //document.getElementsByClassName("tekst").style.display = "none";
+            //document.getElementsByClassName("news").style.display = "inline";
+            //document.getElementById('bbb').style.display = "inline";
+        }
+
+        
+
+       
+
+    </script>
+
+
+</body>
+</html>
