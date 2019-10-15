@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Oblig2</title>
+</head>
+<body>
+    <div>
+        <svg id="chart" width="500" viewBox="0 0 80 60"></svg>
+    </div>
+    Valgt stolpe: <span id="valgt"><i>ingen</i><span><br />
+    <p id="error"> style="display: none; color: darkred;">Må ha en verdi på > 0 < 11</p>
+    Verdi: <input type="number" min="1" max="10" /><button onclick="addPole()">Legg til stolpe</button>
+    <button disabled id="button" onclick="changePole()">Endre valgt stolpe</button><br />
+    <button disabled id="button2" onclick="removePole()">Fjerne valgt stolpe</button>
+
+<script>
+    let numbers = [7, 3, 1, 5, 8];
+    var svgTag = document.getElementById('chart');
+    showChart();
+
+    function showChart() {
+        let svgInnerHtml = '';
+        for (let i = 0; i < numbers.length; i++) {
+            svgInnerHtml += createBar(numbers[i], i + 1);
+        }
+        svgTag.innerHTML = svgInnerHtml;
+    }
+
+    function createBar(number, barNo) {
+        const width = 8;
+        const spacing = 2;
+        let x = (barNo - 1) * (width + spacing);
+        let height = number * 10;
+        let y = 60 - height;
+        let color = calcColor(1, 10, barNo);
+        return `<rect width="${width}" height="${height}"
+                            x="${x}" y="${y}" fill="${color}"></rect>`;
+    }
+
+    function calcColor(min, max, val) {
+        var minHue = 240, maxHue = 0;
+        var curPercent = (val - min) / (max - min);
+        var colString = 'hsl(' + ((curPercent * (maxHue - minHue)) + minHue) + ',100%,50%)';
+        return colString;
+    }
+    function addPole(); //legger til stolpe 
+ var inputtall = document.getElementById('input').value;
+ var antallstolper = parseInt(document.getElementById('chart').childNodes.length) +1;
+
+ if (inputtall < 1 || inputtall > 10) {
+    document.getElementById('error').style.display = 'block';
+        return;
+ }
+
+ document.getElementById('error').style.display = 'none';
+
+ if (markert != undefined) {
+     rammeSwitch(markert)
+     valgtstolpe.innerHTML = <i>ingen</i> 
+     buttonSwitch('av');
+ }
+
+ svgTag.innerHTML += createBar(inputtall, antallstolper); 
+
+
+function removePole() {
+    document.getElementById('error').style.display = 'none'; 
+    svgTag.removeChild(markert);
+    markert = undefined;
+    valgtstolpe.innerHTML = '<i>ingen</i>'
+    buttonSwitch('av');
+    for (i = 0; i < document.getElementById('chart').childNodes.lengt; i++){
+        document.getElementById('chart').childNodes[i].id = i + 1;
+        document.getElementById('chart').childNodes[i].setAttribude('x', i * 10);
+    }
+
+}
+function changePole() {
+    var inputtall = document.getElementById('input').value;
+
+    if (inputtall < 1 || inputtall > 10) {
+        document.getElementById('error').style.display = 'block';
+    }
+    document.getElementById('error').style.display = 'none';
+
+    markert.setAttribude('height', 'inputtall * 10');
+    markert.setAttribude('y', 80 - ('inputtall * 10')); 
+}
+
+function marker(par1) {
+    document.getElementById('error').style.display = 'none';
+    if (markert == par1) {
+        rammeSwitch 
+    }
+}
+</script>
+</body>
+</html>
