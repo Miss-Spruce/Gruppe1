@@ -1,4 +1,3 @@
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -28,30 +27,29 @@ Verdi: <input type="number" min="1" max="10" id="inputValue"/><button onclick="a
 <script>
 let numbers = [7, 3, 1, 5, 8];
 var svgTag = document.getElementById('chart');
-let selectedBar = '';
-showChart();
+let editButton = document.getElementById('editButton');
+let removeButton = document.getElementById('removeButton');
+let chosenBar = document.getElementById('chosenBar');
+let selectedBar = 'ingen';
 
+
+showChart();
 function showChart() {
     let svgInnerHtml = '';
     for (let i = 0; i < numbers.length; i++) {
         svgInnerHtml += createBar(numbers[i], i+1);
-
     }
     svgTag.innerHTML = svgInnerHtml;
-    let chosenBar = document.getElementById('chosenBar');
 
-    if (selectedBar === '') {
-        chosenBar.innerHTML = 'Valgt stolpe: <i>ingen</i>';
-    } else { // viser hvilken stolpe som er valgt
-        chosenBar.innerHTML =  `Valgt stolpe: ${selectedBar}`;
-    }
+    chosenBar.innerHTML = `Valgt stolpe: ${selectedBar}`;
+    let disabledValue = selectedBar == null;
+       removeButton.disabled = 
+       editButton.disabled = selectedBar == null;
 }
-
 // lager og returnerer SVG elementene (rektangelene som brukes som stolpene)
 function createBar(number, barNo) {
     let width = 8;
     const spacing = 2;
-
 // Gjør stolpene smalere, hvis det blir flere stolper
     if (((width + spacing) * numbers.length) > 80){
         width = Math.floor((80 - (numbers.length * spacing)) / numbers.length);
@@ -59,7 +57,6 @@ function createBar(number, barNo) {
             width = 1;
         }
     }
-
     let x = (barNo - 1) * (width + spacing);
 // Reduserer høyden fra 10 til 5, slik at man kan se hele stolpene. 
     let height = number * 5;
@@ -75,7 +72,6 @@ function createBar(number, barNo) {
     ${border}
     onclick="clickBar(${barNo})"></rect>`;
 }
-
 function calcColor(min, max, val) {
     var minHue = 240, maxHue = 0;
     var curPercent = (val - min) / (max - min);
@@ -86,11 +82,9 @@ function calcColor(min, max, val) {
 function clickBar(clickedBar){
     if(clickedBar == selectedBar){
         selectedBar = null;
-        buttonOff();
     }
     else{
         selectedBar = clickedBar;
-        buttonOn();
     }
     showChart();
 }
@@ -101,7 +95,6 @@ function addBar(){
     if(verifyInputValue(input)){
         numbers.push(input);
         selectedBar = `<i>ingen</i>`;
-        buttonOff();
         showChart();
     }
     else{
@@ -115,7 +108,6 @@ function changeBar(){
     if(verifyInputValue(input)){
         numbers[selectedBar-1] = input;
         selectedBar = `<i>ingen</i>`;
-        buttonOff();
         showChart();
     } else {
         errorMessage();
@@ -126,22 +118,12 @@ function removeBar(){
     numbers.splice(selectedBar-1, 1);
     emptyInput();
     selectedBar = `<i>ingen</i>`;
-    buttonOff();
     showChart();
 }
 // Returnerer 'true' hvis input verdien er riktig. (integer mellom 1 og 10).
 function verifyInputValue(input){
     return((input > 0) && (input <= 10) && (Number.isInteger(input)));
-}
-// gjør så man kan trykke på knappen når verdi er valgt.
-function buttonOn(number){
-    document.getElementById('editButton').disabled = false;
-    document.getElementById('removeButton').disabled = false;
-}
-// gjør så knappen ikke kan trykkes på, når det ikke er valgt verdi. 
-function buttonOff(){
-    document.getElementById('editButton').disabled = true;
-    document.getElementById('removeButton').disabled = true;
+
 }
 function errorMessage(){
     alert('verdi må være større enn 0, og mindre enn 10!');

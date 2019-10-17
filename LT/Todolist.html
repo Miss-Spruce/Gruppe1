@@ -35,48 +35,74 @@ Oppgaver
     </li>
     <li>Lag kolonne for "gjort dato" som fylles ut automatisk når man 
         trykker på checkboxen for at det er gjort.</li>
+    
 
+    <table id="tasksTable"></table>
+
+    <table>
+        <tr>
+            <td>Beskrivelse:</td>
+            <td><input id="taskDescription" type="text" /></td>
+        </tr>
+        <tr>
+            <td>Person:</td>
+            <td><input id="taskPerson" type="text" /></td>
+        </tr>
+        <tr>
+            <td>Frist:</td>
+            <td><input id="taskDeadline" type="date" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button onclick="addTask()">Legg til oppgave</button></td>
+        </tr>
+    </table>
 
 </ol>
 <table id="tasksTable"></table>
 <p>
-    <input id="taskDescription" type="text"/><button onclick="addTask()">Legg til oppgave</button>
+    <!-- <input id="taskDescription" type="text"/><button onclick="addTask()">Legg til oppgave</button> -->
 </p>
 <script>
     // Model
-    var tasks = [
-        { description: 'Handle til middag', isDone: true },
-        { description: 'Lage middag', isDone: false },
-        { description: 'Spise middag', isDone: false },
-     ];
-     var persons = [
-        { description: 'Martin', isDone: false},
-        { description: 'Joakim', isDone: false},
-        { description: 'Lena', isDone: false},
-    ];
-  
+    let tasks = [
+            { description: 'Handle til middag', person: 'Martin', deadline: new Date("2019-09-16"), doneDate: new Date("2019-10-18"), isDone: false },
+            { description: 'Lage middag', person: 'Joakim', deadline: new Date("2019-09-17"), isDone: false },
+            { description: 'Spise middag', person: 'Lena', deadline: new Date("2019-09-18"), isDone: false },
+        ];
+
+        tasks.sort(function (task) { return task.description });
 
     // Controller
-    var taskDescriptionInput = document.getElementById('taskDescription');
+    let taskDescriptionInput = document.getElementById('taskDescription');
+        let taskPersonInput = document.getElementById('taskPerson');
+        let taskDeadlineInput = document.getElementById('taskDeadline');
+
     function addTask() {
         tasks.push({
-            description: taskDescriptionInput.value,
+            description: taskDescriptionInput.value, 
+            person: taskPersonInput.value,
+            deadline: new Date(taskDeadlineInput.value),
             isDone: false
         });
         taskDescriptionInput.value = '';
+        taskPersonInput.value = '';
+        taskDeadlineInput.value = '';
         show();
     }
 
     // View
-    var tasksTable = document.getElementById('tasksTable');
-    var personsTable = document.getElementById('personsTable');
+    let tasksTable = document.getElementById('tasksTable');
+    show();
+ 
     show();
     function show() {
         let html = `
                         <tr>
                             <th>Oppgave</th>
                             <th>Hvem</th>
-                            <th>Gjort</th>
+                            <th>Frist</th>
+                            <th colspan="2">Gjort</th>
                             <th></th>
                         </tr>`;
         for (let i = 0; i < tasks.length; i++) {
@@ -88,14 +114,15 @@ Oppgaver
     }
     function createHtmlRow(i) {
         const task = tasks[i];
-        const person = persons[i];
-        const checkedHtml = task.isDone ?  'checked="checked"' : '';
+        const checkedHtml = task.isDone  ?  'checked="checked"' : '';
+        const doneDate = task.isDone ? task.doneDate.toLocaleDateString() : ''; 
         if (!task.editMode)
             return `<tr>
                             <td>${task.description}</td>
-                            <td>${person.description}</td>
-                        
+                            <td>${task.person}</td>
+                            <td>${task.deadline.toLocaleDateString()}</td>
                             <td><input onchange="changeIsDone(this, ${i})" type="checkbox" ${checkedHtml} /></td>
+                            <td>${doneDate}</td>
                             <td>
                                 <button onclick="deleteTask(${i})">Slett</button>
                                 <button onclick="editTask(${i})">Rediger</button>
@@ -104,8 +131,11 @@ Oppgaver
                         `;
         return `<tr>
                             <td><input id="editDescription${i}" type="text" value="${task.description}"/></td>
-                            <td><input id="editDescription${i}" type="text" value="${person.description}"/></td>
+                            <td><input id="editDescription${i}" type="text" value="${task.person}"/></td>
+                            <td><input id="editDeadline${i}" type="date" value="${task.deadline.toISOString().substr(0, 10)}"></td>
                             <td><input onchange="changeIsDone(this, ${i})" type="checkbox" ${checkedHtml} /></td>
+                            <td></td>
+                            <td>${doneDate}</td>
                             <td>
                                 <button onclick="updateTask(${i})">Lagre</button>
                             </td>
@@ -114,6 +144,7 @@ Oppgaver
     }
     function changeIsDone(checkbox, index) {
         tasks[index].isDone = checkbox.checked;
+        tasks[index].isDone = new Date(Date.now());
         show();
     }
     function deleteTask(index) {
@@ -128,12 +159,20 @@ Oppgaver
         const id = `editDescription${index}`;
         const inputTag = document.getElementById(id);
         const task = tasks[index];
+        const personInput = document.getElementById(`editDescription${index}`);
+        const taskDeadlineInput = document.getElementById(`editDescription${index}`);
        
+        task.person = personInput.value;
+        task.deadline = new Date(taskDeadlineInput.value);
         task.description = inputTag.value;
         task.editMode = false;
         show();
     }
-   
+    function cancelUpdateTask(index) {
+            tasks[index].editMode = false;
+            show();
+        }
+
 </script>
 </body>
 </html>
