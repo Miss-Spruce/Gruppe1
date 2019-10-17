@@ -23,23 +23,44 @@
     </style>
 </head>
 <body>
-<input type="date"/>
-Oppgaver
-<ol>
-    <li>
-        Legg til person. Må kunne angis når man lager ny oppgave og må
-        kunne redigeres
-    </li>
-    <li>Legg til kolonne for frist. Bruk input-tag med type="date".
-        Konvertering til visningsformat: <tt>new Date("2019-02-13").toLocaleDateString()</tt>
-    </li>
-    <li>Lag kolonne for "gjort dato" som fylles ut automatisk når man 
-        trykker på checkboxen for at det er gjort.</li>
-    
+<table id="tasksTable"></table>
 
-    <table id="tasksTable"></table>
+<script>
+    // Model
+    let tasks = [
+            { description: 'Handle til middag', person: 'Martin', deadline: new Date("2019-09-16"), doneDate: new Date("2019-10-18"), isDone: false },
+            { description: 'Lage middag', person: 'Joakim', deadline: new Date("2019-09-17"), isDone: false },
+            { description: 'Spise middag', person: 'Lena', deadline: new Date("2019-09-18"), isDone: false },
+        ];
 
-    <table>
+        tasks.sort(function (task) { return task.description });
+
+    // Controller
+        let taskDescriptionInput = document.getElementById('taskDescription');
+        let taskPersonInput = document.getElementById('taskPerson');
+        let taskDeadlineInput = document.getElementById('taskDeadline');
+
+    function addTask() {
+        tasks.push({
+          description: taskDescriptionInput.value, 
+          person: taskPersonInput.value,
+          deadline: new Date(taskDeadlineInput.value),
+            isDone: false
+        });
+        taskDescriptionInput.value = '';
+        taskPersonInput.value = '';
+        taskDeadlineInput.value = '';
+        show();
+    }
+
+    // View
+    let tasksTable = document.getElementById('tasksTable');
+    show();
+ 
+    show();
+    function show() {
+        let html = `
+      <table>
         <tr>
             <td>Beskrivelse:</td>
             <td><input id="taskDescription" type="text" /></td>
@@ -56,55 +77,16 @@ Oppgaver
             <td></td>
             <td><button onclick="addTask()">Legg til oppgave</button></td>
         </tr>
-    </table>
-
-</ol>
-<table id="tasksTable"></table>
-<p>
-    <!-- <input id="taskDescription" type="text"/><button onclick="addTask()">Legg til oppgave</button> -->
-</p>
-<script>
-    // Model
-    let tasks = [
-            { description: 'Handle til middag', person: 'Martin', deadline: new Date("2019-09-16"), doneDate: new Date("2019-10-18"), isDone: false },
-            { description: 'Lage middag', person: 'Joakim', deadline: new Date("2019-09-17"), isDone: false },
-            { description: 'Spise middag', person: 'Lena', deadline: new Date("2019-09-18"), isDone: false },
-        ];
-
-        tasks.sort(function (task) { return task.description });
-
-    // Controller
-    let taskDescriptionInput = document.getElementById('taskDescription');
-        let taskPersonInput = document.getElementById('taskPerson');
-        let taskDeadlineInput = document.getElementById('taskDeadline');
-
-    function addTask() {
-        tasks.push({
-            description: taskDescriptionInput.value, 
-            person: taskPersonInput.value,
-            deadline: new Date(taskDeadlineInput.value),
-            isDone: false
-        });
-        taskDescriptionInput.value = '';
-        taskPersonInput.value = '';
-        taskDeadlineInput.value = '';
-        show();
-    }
-
-    // View
-    let tasksTable = document.getElementById('tasksTable');
-    show();
- 
-    show();
-    function show() {
-        let html = `
-                        <tr>
+        </table>
+        <tr>
                             <th>Oppgave</th>
                             <th>Hvem</th>
                             <th>Frist</th>
                             <th colspan="2">Gjort</th>
                             <th></th>
-                        </tr>`;
+                        </tr> 
+                 
+     `;
         for (let i = 0; i < tasks.length; i++) {
             html += createHtmlRow(i);
         
@@ -132,7 +114,7 @@ Oppgaver
         return `<tr>
                             <td><input id="editDescription${i}" type="text" value="${task.description}"/></td>
                             <td><input id="editDescription${i}" type="text" value="${task.person}"/></td>
-                            <td><input id="editDeadline${i}" type="date" value="${task.deadline.toISOString().substr(0, 10)}"></td>
+                            <td><input id="editDeadline${i}" type="date" value="${task.deadline.toISOString().substr(0,10)}"></td>
                             <td><input onchange="changeIsDone(this, ${i})" type="checkbox" ${checkedHtml} /></td>
                             <td></td>
                             <td>${doneDate}</td>
@@ -156,15 +138,16 @@ Oppgaver
         show();
     }
     function updateTask(index) {
-        const id = `editDescription${index}`;
-        const inputTag = document.getElementById(id);
-        const task = tasks[index];
+       // const id = `editDescription${index}`;
+      //  const inputTag = document.getElementById(id);
+        const descriptionInput = document.getElementById(`editDescription${index}`);
         const personInput = document.getElementById(`editDescription${index}`);
         const taskDeadlineInput = document.getElementById(`editDescription${index}`);
-       
+        const task = tasks[index];
+
         task.person = personInput.value;
         task.deadline = new Date(taskDeadlineInput.value);
-        task.description = inputTag.value;
+        task.description = descriptionInput.value;
         task.editMode = false;
         show();
     }
