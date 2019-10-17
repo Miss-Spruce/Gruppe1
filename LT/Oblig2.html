@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Oblig2(2)</title>
+<title>Oblig2</title>
             
 <style>
     /* lager rammen rundt stolpe som er valgt */
-  .border{
+  .border {
   stroke:black;
   stroke-width:0.5px;
  }
@@ -28,7 +28,7 @@ Verdi: <input type="number" min="1" max="10" id="inputValue"/><button onclick="a
 <script>
 let numbers = [7, 3, 1, 5, 8];
 var svgTag = document.getElementById('chart');
-let selectedBar = null;
+let selectedBar = '';
 showChart();
 
 function showChart() {
@@ -40,9 +40,9 @@ function showChart() {
     svgTag.innerHTML = svgInnerHtml;
     let chosenBar = document.getElementById('chosenBar');
 
-    if (selectedBar === null) {
-        chosenBar.innerHTML = `Valgt stolpe: <i>ingen</i>`;
-    } else {
+    if (selectedBar === '') {
+        chosenBar.innerHTML = 'Valgt stolpe: <i>ingen</i>';
+    } else { // viser hvilken stolpe som er valgt
         chosenBar.innerHTML =  `Valgt stolpe: ${selectedBar}`;
     }
 }
@@ -73,7 +73,7 @@ function createBar(number, barNo) {
     return `<rect width="${width}" height="${height}"
     x="${x}" y="${y}" fill="${color}"
     ${border}
-    onclick="barOnClick(${barNo})"></rect>`;
+    onclick="clickBar(${barNo})"></rect>`;
 }
 
 function calcColor(min, max, val) {
@@ -83,7 +83,7 @@ function calcColor(min, max, val) {
     return colString;
 }
 // Får ramme på stolpen som er valgt, og gjør knappene aktiv når en stolpe er valgt.
-function barOnClick(clickedBar){
+function clickBar(clickedBar){
     if(clickedBar == selectedBar){
         selectedBar = null;
         buttonOff();
@@ -117,8 +117,7 @@ function changeBar(){
         selectedBar = `<i>ingen</i>`;
         buttonOff();
         showChart();
-    }
-    else{
+    } else {
         errorMessage();
     }
 }
