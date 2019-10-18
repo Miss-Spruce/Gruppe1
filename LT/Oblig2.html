@@ -14,16 +14,13 @@
 </style>
 </head>
 <body>
-<div>
 <svg id="chart" width="500" viewBox="0 0 80 60"></svg>
-</div>
-        
-<div id="chosenBar">Valgt stolpe: <i>ingen</i></div><br />
+</div>      
+<div id="chosenBar"></div><br />
 Verdi: <input type="number" min="1" max="10" id="inputValue"/><button onclick="addBar()">Legg til stolpe</button>
 <button disabled id="editButton" onclick="changeBar()">Endre valgt stolpe</button><br />
 <button disabled id="removeButton" onclick="removeBar()">Fjerne valgt stolpe</button>
-        
-          
+                 
 <script>
 let numbers = [7, 3, 1, 5, 8];
 var svgTag = document.getElementById('chart');
@@ -31,7 +28,7 @@ let editButton = document.getElementById('editButton');
 let removeButton = document.getElementById('removeButton');
 let chosenBar = document.getElementById('chosenBar');
 let selectedBar = null;
-
+let input = document.getElementById(inputValue);
 
 showChart();
 function showChart() {
@@ -63,18 +60,14 @@ function createBar(number, barNo) {
     let y = 60 - height;
     let color = calcColor(1, 10, barNo);
     let border = '';
-    if(barNo == selectedBar){
+    if(selectedBar == barNo){
         border = 'class="border"';
-    }
-
-
-// onclick så stolpene reagerer på klikk. 
-    return `<rect width="${width}" height="${height}"
-    x="${x}" y="${y}" fill="${color}"
-   ${border}
-  onclick="clickBar(${barNo})"></rect>`;
- }
-
+        return `<rect width="${width}" height="${height}"
+        x="${x}" y="${y}" fill="${color}"${border}onclick="clickBar(${barNo})"></rect>`;
+      } else {
+      return `<rect onclick="clickBar(${barNo})" width="${width}" height="${height}"
+      x="${x}" y="${y}" fill="${color}"></rect>`;}
+    }  
 function calcColor(min, max, val) {
     var minHue = 240, maxHue = 0;
     var curPercent = (val - min) / (max - min);
@@ -83,9 +76,11 @@ function calcColor(min, max, val) {
 }
 // Får ramme på stolpen som er valgt, og gjør knappene aktiv når en stolpe er valgt.
 function clickBar(clickedBar){
-    if(clickedBar == selectedBar){
-        selectedBar = null;
-   }
+     if(clickedBar == selectedBar){
+         selectedBar = null;
+    } else {
+ selectedBar = clickedBar; 
+    }
     showChart();
 }
 // Legger til stolpe, etter verdien som blir valgt.
@@ -96,8 +91,7 @@ function addBar(){
         numbers.push(input);
         selectedBar = null;
         showChart();
-    }
-    else{
+    } else {
        errorMessage();
     }
 }
@@ -123,7 +117,6 @@ function removeBar(){
 // Returnerer 'true' hvis input verdien er riktig. (integer mellom 1 og 10).
 function verifyInputValue(input){
     return((input > 0) && (input <= 10) && (Number.isInteger(input)));
-
 }
 function errorMessage(){
     alert('verdi må være større enn 0, og mindre enn 10!');
