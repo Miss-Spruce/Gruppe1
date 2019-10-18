@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8" />
+<title>Labyrint</title>
+<style type="text/css">
+    body {
+        background-color: black;
+    }
+    table {
+        border-spacing: 0;
+    }
+    td {
+        background-color: black;
+        padding: 0;
+    }
+    td.room {
+        width: 40px;
+        height: 40px;
+    }
+    td.wall {
+        background-color: #FF0066;
+    }
+    td.noWall {
+        background-color: black;
+        }
+    td.small {
+        width: 10px;
+        height: 10px;
+    }
+    td.wide {
+        width: 40px;
+    }
+    td.high {
+        height: 40px;
+    }
+</style>
+</head>
+<body>
+    <div id="labyrint"></div>
+
+    <script type="text/javascript">
+
+    var size = 15;
+    var html = '';
+    function switchWall(list) {
+
+    if (list.classList.contains('noWall')) {
+        list.classList.remove('noWall');
+        list.classList.add('wall');
+    } else {
+        list.classList.add('noWall');
+        list.classList.remove('wall');
+    }
+}
+        for (var rowIndex = 0; rowIndex < size; rowIndex++) {
+    html += '<tr>';
+
+        for (var columnIndex = 0; columnIndex < size; columnIndex++) {
+        var wallOrNoWall = rowIndex === 0 || Math.random() < 0.5 ? 'wall' : 'noWall';
+    html += '<td class="wall small"></td>';
+    html += '<td onclick="switchWall(this)" class="' + wallOrNoWall + ' wide"></td>';
+}
+    html += '<td class="wall small"></td>';
+    html += '</tr>';
+    html += '<tr>';
+
+        for (var columnIndex = 0; columnIndex < size; columnIndex++) {
+        var wallOrNoWall = columnIndex === 0 || Math.random() < 0.5 ? 'wall' : 'noWall';
+    html += '<td onclick="switchWall(this)" class="' + wallOrNoWall + ' high"></td>';
+    html += '<td class="room"></td>';
+}
+    html += '<td onclick="switchWall(this)" class="wall high"></td>';
+    html += '</tr>';
+}
+    html += '<tr>';
+
+        for (var columnIndex = 0; columnIndex < size; columnIndex++) {
+    html += '<td class="wall small"></td>';
+    html += '<td onclick="switchWall(this)" class="wall wide"></td>';
+}
+    html += '<td class="wall small"></td>';
+    html += '</tr>';
+    html = '<table>' + html + '</table>';
+    
+    document.getElementById('labyrint').innerHTML = html;
+
+</script>
+</body>
+</html>
