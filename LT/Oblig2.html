@@ -41,7 +41,7 @@ function showChart() {
     }
     svgTag.innerHTML = svgInnerHtml;
 
-    chosenBar.innerHTML = `Valgt stolpe: ${selectedBar}`
+    chosenBar.innerHTML = 'valgt stolpe: ' + (selectedBar || 'ingen');
     let disabledValue = selectedBar == null;
        removeButton.disabled = 
        editButton.disabled = selectedBar == null;
@@ -66,12 +66,15 @@ function createBar(number, barNo) {
     if(barNo == selectedBar){
         border = 'class="border"';
     }
+
+
 // onclick så stolpene reagerer på klikk. 
     return `<rect width="${width}" height="${height}"
     x="${x}" y="${y}" fill="${color}"
-    ${border}
-    onclick="clickBar(${barNo})"></rect>`;
-}
+   ${border}
+  onclick="clickBar(${barNo})"></rect>`;
+ }
+
 function calcColor(min, max, val) {
     var minHue = 240, maxHue = 0;
     var curPercent = (val - min) / (max - min);
@@ -82,9 +85,7 @@ function calcColor(min, max, val) {
 function clickBar(clickedBar){
     if(clickedBar == selectedBar){
         selectedBar = null;
-    } else {
-        selectedBar = clickedBar;
-    }
+   }
     showChart();
 }
 // Legger til stolpe, etter verdien som blir valgt.
