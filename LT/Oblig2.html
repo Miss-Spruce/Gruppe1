@@ -30,7 +30,7 @@ var svgTag = document.getElementById('chart');
 let editButton = document.getElementById('editButton');
 let removeButton = document.getElementById('removeButton');
 let chosenBar = document.getElementById('chosenBar');
-let selectedBar = 'ingen';
+let selectedBar = null;
 
 
 showChart();
@@ -41,7 +41,7 @@ function showChart() {
     }
     svgTag.innerHTML = svgInnerHtml;
 
-    chosenBar.innerHTML = `Valgt stolpe: ${selectedBar}`;
+    chosenBar.innerHTML = `Valgt stolpe: ${selectedBar}`
     let disabledValue = selectedBar == null;
        removeButton.disabled = 
        editButton.disabled = selectedBar == null;
@@ -82,8 +82,7 @@ function calcColor(min, max, val) {
 function clickBar(clickedBar){
     if(clickedBar == selectedBar){
         selectedBar = null;
-    }
-    else{
+    } else {
         selectedBar = clickedBar;
     }
     showChart();
@@ -94,11 +93,11 @@ function addBar(){
     emptyInput();
     if(verifyInputValue(input)){
         numbers.push(input);
-        selectedBar = `<i>ingen</i>`;
+        selectedBar = null;
         showChart();
     }
     else{
-        errorMessage();
+       errorMessage();
     }
 }
 // Endrer høyden på valgt stolpe.
@@ -107,17 +106,17 @@ function changeBar(){
     emptyInput();
     if(verifyInputValue(input)){
         numbers[selectedBar-1] = input;
-        selectedBar = `<i>ingen</i>`;
+        selectedBar = null;
         showChart();
     } else {
-        errorMessage();
+       errorMessage();
     }
 }
 // Fjerner valgte stolpe.
 function removeBar(){
     numbers.splice(selectedBar-1, 1);
     emptyInput();
-    selectedBar = `<i>ingen</i>`;
+    selectedBar = null;
     showChart();
 }
 // Returnerer 'true' hvis input verdien er riktig. (integer mellom 1 og 10).
