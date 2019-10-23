@@ -1,26 +1,24 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Oblig2</title>
             
 <style>
     /* lager rammen rundt stolpe som er valgt */
-  .border {
-  stroke:black;
-  stroke-width:0.5px;
- }
+.border {
+    stroke:black;
+    stroke-width:0.5px;
+}
 </style>
 </head>
 <body>
 <svg id="chart" width="500" viewBox="0 0 80 60"></svg>
 </div>      
 <div id="chosenBar"></div><br />
-Verdi: <input type="number" min="1" max="10" id="inputValue"/><button onclick="addBar()">Legg til stolpe</button>
+Verdi: <input type="number" min="1" max="10" id="inputValue"><button onclick="addBar()">Legg til stolpe</button>
 <button disabled id="editButton" onclick="changeBar()">Endre valgt stolpe</button><br />
 <button disabled id="removeButton" onclick="removeBar()">Fjerne valgt stolpe</button>
-                 
+                
 <script>
 let numbers = [7, 3, 1, 5, 8];
 var svgTag = document.getElementById('chart');
@@ -40,8 +38,8 @@ function showChart() {
 
     chosenBar.innerHTML = 'valgt stolpe: ' + (selectedBar || 'ingen');
     let disabledValue = selectedBar == null;
-       removeButton.disabled = 
-       editButton.disabled = selectedBar == null;
+        removeButton.disabled = 
+        editButton.disabled = selectedBar == null;
 }
 // lager og returnerer SVG elementene (rektangelene som brukes som stolpene)
 function createBar(number, barNo) {
@@ -64,9 +62,9 @@ function createBar(number, barNo) {
         border = 'class="border"';
         return `<rect width="${width}" height="${height}"
         x="${x}" y="${y}" fill="${color}"${border}onclick="clickBar(${barNo})"></rect>`;
-      } else {
-      return `<rect onclick="clickBar(${barNo})" width="${width}" height="${height}"
-      x="${x}" y="${y}" fill="${color}"></rect>`;}
+    } else {
+    return `<rect onclick="clickBar(${barNo})" width="${width}" height="${height}"
+    x="${x}" y="${y}" fill="${color}"></rect>`;}
     }  
 function calcColor(min, max, val) {
     var minHue = 240, maxHue = 0;
@@ -76,10 +74,10 @@ function calcColor(min, max, val) {
 }
 // Får ramme på stolpen som er valgt, og gjør knappene aktiv når en stolpe er valgt.
 function clickBar(clickedBar){
-     if(clickedBar == selectedBar){
-         selectedBar = null;
+    if(clickedBar == selectedBar){
+    selectedBar = null;
     } else {
- selectedBar = clickedBar; 
+    selectedBar = clickedBar; 
     }
     showChart();
 }
@@ -92,7 +90,7 @@ function addBar(){
         selectedBar = null;
         showChart();
     } else {
-       errorMessage();
+        errorMessage();
     }
 }
 // Endrer høyden på valgt stolpe.
@@ -104,7 +102,7 @@ function changeBar(){
         selectedBar = null;
         showChart();
     } else {
-       errorMessage();
+        errorMessage();
     }
 }
 // Fjerner valgte stolpe.
