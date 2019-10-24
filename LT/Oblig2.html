@@ -13,6 +13,9 @@
     stroke:black;
     stroke-width:0.5px;
 }
+.boxforbuttons {
+    flex: wrap;
+}
 button[disabled] {
     background-color: rgb(42, 75, 184);
     cursor:not-allowed !important;
@@ -47,13 +50,14 @@ input[type=number]::-webkit-inner-spin-button,
 </style>
 </head>
 <body>
-<svg id="chart" width="500" viewBox="0 0 80 60"></svg>
-</div>      
+<svg id="chart" width="500" viewBox="0 0 80 60"></svg> 
+<div class="boxforbuttons">
 <div id="chosenBar"></div><br />
-Verdi: <input type="number" min="1" max="10" id="inputValue"><button onclick="addBar()">Legg til stolpe</button>
+<input type="number" placeholder="Verdi:" min="1" max="10" id="inputValue"><button onclick="addBar()">Legg til stolpe</button>
 <button disabled id="editButton" onclick="changeBar()">Endre valgt stolpe</button><br />
 <button disabled id="removeButton" onclick="removeBar()">Fjerne valgt stolpe</button>
-                
+</div>
+
 <script>
 let numbers = [7, 3, 1, 5, 8];
 var svgTag = document.getElementById('chart');
