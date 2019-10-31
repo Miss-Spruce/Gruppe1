@@ -83,7 +83,7 @@ span {
     width: 80%;
 }
 
-.FirstDraw {
+.firstDraw {
     color: #23819C;
 }
 </style>
@@ -270,19 +270,17 @@ function addTextList(list) {
   return textList.substr(0, indexLastComma)
     + ' og ' + textList.substr(indexLastComma + 1);
 }
-  function addDateTextForShow(dato) {
-  return dato.toLocaleString().replace(',', '').substr(0, 15);
+  function addDateTextForShow(date) {
+  return date.toLocaleString().replace(',', '').substr(0, 15);
 }
 
-function addDateTextForSaving(dato) {
-  return dato.toISOString().substr(0, 16).replace('T', ' ');
+function addDateTextForSaving(date) {
+  return date.toISOString().substr(0, 16).replace('T', ' ');
 }
 
 function addDateTextNowForSaving() {
   return addDateTextForSaving(new Date());
-}
-   
-   
+}  
 </script>
 </body>
 </html>
