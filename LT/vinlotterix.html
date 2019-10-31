@@ -19,9 +19,270 @@
         padding-left: 4px;
         display: grid;
         height: 100vh; 
+        grid-template-columns: 200px 2fr;
+        grid-template-rows: 40px 1fr;
+        grid-template-areas: 'menu header' 'menu content';
+        background-color: rgb(250, 250, 250);
     }
-    </style>
+    
+    div.pageWithoutMenu {
+        grid-template-columns:  0px 2fr;
+    }
+
+    div.menu {
+        grid-area: menu;
+        overflow: hidden;
+    }
+
+    div.content {
+        grid-area: content;
+    }
+
+    div.header {
+        grid-area: header;
+    }
+
+    div.header, div.content {
+        padding-left: 6px;
+        padding-top: 8px;
+    }
+
+    div.menu {
+        height: 100%;
+    }
+    div.screen {
+    border: 1px solid gray;
+    float: left;
+    height: 200px;
+    width: 170px;
+    margin-left: 20px;
+    background-color: rgb(250, 250, 250);
+    color: black;
+    padding: 0px 4px;
+}
+
+span {
+    color: rgb(137,24,38);
+    font-weight: bolder;
+}
+
+.button {
+    background-color: #872187;
+    color: rgb(250, 250, 250);
+}
+
+.smallButton {
+    font-size: 60%;
+}
+
+.fixed {
+    padding-left: 8%;
+    padding-top: 2%;
+    margin-top: 4%;
+    margin-left: 3%;
+    width: 80%;
+}
+
+.FirstDraw {
+    color: #23819C;
+}
+</style>
 <body>
+<div class="page" id="page">
+<div class="header" id="header">
+<button class="button" onclick="showAndHideMenu()">☰</button> Vinlotterix 🍷
+</div>
+<div class="content" id="content"></div>
+<div class="menu" id="menu">
+<button class="button fixed" onclick="showPersons()">Personer</button><br />
+<button class="button fixed" onclick="showDraws()">Vinnere</button><br />
+</div>
+</div>
+<script>
+
+let model = {
+  persons: {
+    chooseAll: false,
+    drawNumber: 1,
+    list: [
+      { id: 100, name: 'Martin', isChosen: true },
+      { id: 101, name: 'Joakim', isChosen: true },
+      { id: 102, name: 'LT', isChosen: false },
+      { id: 103, name: 'Albin', isChosen: true },
+    ]
+  },
+  draws: [
+    {
+      winners: ['Albin'],
+      time: '2019-11-02 17:11',
+      participants: ['Martin', 'Joakim', 'Albin']
+    }
+    , {
+      winners: ['Martin', 'Joakim', 'Marcus'],
+      time: '2019-11-01 17:11',
+      participants: ['Martin', 'Joakim', 'Albin', 'Marcus', 'Fredrik']
+    }
+  ]
+};
+
+showPersons();
+
+function showAndHideMenu() {
+    document.getElementById('page').classList.toggle('pageWithoutMenu');
+}
+  
+// view
+function showPersons() {
+  let html = `<table>
+                <tr>
+                  <td><input type="checkbox"
+                  onclick="chooseAllOrNone(this.checked)"
+                  ${addHtmlChecked(model.persons.chooseAll)}/></td>
+                  <td><b>Persons</b></td>
+                  <td>
+                  <!--<button class="smallButton" onclick="editPersons()">✎</button>-->
+                  </td>
+                </tr>`;
+  for (let person of model.persons.list) {
+    html += `<tr>
+                <td><input type="checkbox"
+                onclick="choosePerson(${person.id})" 
+                ${addHtmlChecked(person.isChosen)}"/></td>
+                <td>${person.name}</td>
+                <td><button class="smallButton"  onclick="deletePerson(${person.id})">x</button></td>
+              </tr>`;
+  }
+  html += `<tr>
+              <td></td>
+              <td colspan="3">
+                <input size="6" type="text" id="newPerson"/>
+                <button class="smallButton" onclick="addPerson()">legg til person</button>
+              </td>
+            </tr>
+            <tr><td>&nbsp;</td></tr>
+            <tr>
+              <td colspan="3">
+                <button class="button" onclick="draw()">Trekk!</button>
+                <input type="number" size="1" value="${model.persons.drawNumber}" onchange="model.persons.drawNumber = parseInt(this.value)"/>
+                <button class="" onclick="adjustNumber(1)">▲</button>
+                <button class="" onclick="adjustNumber(-1)">▼</button>
+              </td>
+            </tr>
+          </table>`;
+  document.getElementById('content').innerHTML = html;
+}
+
+function addHtmlChecked(Chosen) {
+  return Chosen ? 'checked="checked"' : '';
+}
+
+// controller
+function chooseAllOrNone(all) {
+  model.persons.chooseAll = all;
+  for (let person of model.persons.list) {
+    person.isChosen = all;
+  }
+  showPersons();
+}
+
+function addPerson() {
+  const name = document.getElementById('newPerson').value;
+  const id = model.persons.list.map(p => p.id).reduce((max, value) => Math.max(max, value), -1) + 1;
+  model.persons.list.push(
+    { id: id, name: name, isChosen: true });
+  showPersons();
+}
+
+function choosePerson(id) {
+  const person = findPerson(id);
+  person.isChosen = !person.isChosen;
+  showPersons();
+}
+
+function deletePerson(id) {
+  model.persons.list = model.persons.list.filter(p => p.id !== id);
+  showPersons();
+}
+
+function draw() {
+  let number = model.persons.drawNumber;
+  const personsList = model.persons.list.filter(p => p.isChosen);
+  const indexes = Array.from(personsList.keys());
+  const winners = [];
+  while (number-- > 0 && indexes.length > 0) {
+    const randomIndex = Math.floor(Math.random() * indexes.length);
+    const index = indexes.splice(randomIndex, 1);
+    winners.push(personsList[index].name);
+  }
+  model.draws.unshift({
+    winners: winners,
+    time: addDateTextNowForSaving(),
+    participants: personsList.map(p => p.name)
+  });
+  showDraws();
+}
+
+function adjustNumber(attend) {
+  model.persons.drawNumber =
+    Math.max(1, model.persons.drawNumber + attend);
+  showPersons();
+}
+
+function findPerson(id) {
+  return model.persons.list.filter(p => p.id === id)[0];
+}
+
+// view
+const dayName = [
+  'søndag', 'mandag', 'tirsdag',
+  'onsdag', 'torsdag', 'fredag',
+  'lørdag'
+];
+
+function showDraws() {
+  let html = '';
+  let cssClass = 'firstDraw';
+  for (let draw of model.draws) {
+    const time = new Date(draw.time);
+    const dateText = addDateTextForShow(time);
+    const weekday = dayName[time.getDay()];
+    const winners = draw.winners;
+    const participants = draw.participants;
+    const winnerWord = winners.length === 1 ? 'Vinneren' : 'Vinnerne';
+
+    html +=
+      `<p>
+          <small>${weekday} ${dateText}</small><br/>
+          <b class="${cssClass}">${winnerWord} er ${addTextList(winners)}!</b><br/>
+          <small>Trukket fra totalt ${participants.length} personer: ${addTextList(participants)}</small>
+      </p>`;
+    cssClass = '';
+  }
+  document.getElementById('content').innerHTML = html;
+}
+
+function addTextList(list) {
+  if (list.length === 0) return '';
+  if (list.length === 1) return list[0];
+
+  const textList = list.join(', ');
+  const indexLastComma = textList.lastIndexOf(',');
+  return textList.substr(0, indexLastComma)
+    + ' og ' + textList.substr(indexLastComma + 1);
+}
+  function addDateTextForShow(dato) {
+  return dato.toLocaleString().replace(',', '').substr(0, 15);
+}
+
+function addDateTextForSaving(dato) {
+  return dato.toISOString().substr(0, 16).replace('T', ' ');
+}
+
+function addDateTextNowForSaving() {
+  return addDateTextForSaving(new Date());
+}
    
+   
+</script>
 </body>
 </html>
