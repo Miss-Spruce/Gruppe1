@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
@@ -8,7 +7,6 @@
     <style type="text/css">
         body {
             font-family: helvetica;
-            background-color: cadetblue;
         }
         svg {
             fill: white;
@@ -24,7 +22,6 @@
         table, td {
             border: black solid 1px;
             border-collapse: collapse;
-            background-color: white;
         }
         td {
             padding: 6px;
@@ -32,14 +29,6 @@
         }
         .diceHeld {
             fill: lightsteelblue;
-        }
-        a {
-            color: black;
-            text-decoration: none;
-        }
-        h1 {
-            font-family: helvetica;
-            font-size: 40px;
         }
         button {
         background-color: #006666;
@@ -52,10 +41,13 @@
             cursor: pointer;
             font-size: 15px;
         }
+        a {
+            text-decoration: none;
+            color: black;
+        }
     </style>
 </head>
 <body>
-    <h1>Yatzy! </h1>
     <p>
         <button onclick="throwDice()">Kast terningene!</button>
     </p>
@@ -114,8 +106,9 @@
     <table id="tblScoreBoard">
         <tr>
             <td></td>
-            <td>LT</td>
+            <td>whoever</td>
         </tr>
+        <tr>
             <td><a href="javascript:placeResultUpperSection(1)">Enere</a></td>
             <td></td>
         </tr>
@@ -452,7 +445,6 @@
             scoreBoard.yatzy = null;
             return scoreBoard;
         }
-
     </script>
 </body>
 </html>
