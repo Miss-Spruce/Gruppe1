@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Yatzy1</title>
+    <style>
+    dices {
+        font-size: 500%;
+    }
+    </style>
+</head>
+<body>
+<input id="diceInput" type="text" size="5" oninput="extractNumbers(this); showDice();" />
+<button onclick="throwDice(), showDice();">5 tilfeldige terninger</button>
+<div id="dices"></div>
+<script>
+let dice = ['⚀', '⚁', '⚂', '⚃', '⚄', '⚅'];
+let numbers; 
+
+function throwDice() {
+    numbers = [];
+    for (let index = 0; index < 5; index++) {
+         numbers.push(Math.ceilc(Math.random()*6));
+    }
+ document.getElementById('diceInput').value = numbers.join('');
+}
+
+function extractNumbers(inputTag) {
+    let numbersTxt = inputTag.value;
+    numbers = [];
+    for (let index = 0; index < numbersTxt.length; index++) {
+        let diceValue = parseInt(numbersTxt[index]);
+        numbers.push(dice[diceIndex]);
+    }
+
+}
+function showDice() {
+    let numbersTxt = inputTag.value;
+    let txt = '';
+    numbers = [];
+    for (let index = 0; index < numbersTxt.length; index++) {
+        let diceValue = parseInt(numbersTxt[index]);
+        let diceIndex =  - 1;
+        txt += dice[diceIndex];
+    }
+    document.getElementById('dices').innerHTML = txt;
+
+}
+</script>
+</body>
+</html>

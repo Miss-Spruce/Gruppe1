@@ -38,7 +38,7 @@ let todoCollection = db.collection('todoItems');
         collectionSnapshot.forEach(
             function (todoItemSnapshot) {
                 let todoItem = todoItemSnapshot.data();
-                html += '<li>' + todoItem.todoText + ' (' + todoItem.todoDate.toDate() + ')</li>';         
+                html += '<li>' + todoItem.todoText + ' (' + todoItem.todoDate.toDate().toLocaleDateString() + ')</li>';         
             });
             html += '</ul>'; 
             document.getElementById('todo').innerHTML = html;
